@@ -1,17 +1,34 @@
+import { Modal } from "antd";
+import { useState } from "react";
 import { FaQuestionCircle, FaEdit, FaPen } from "react-icons/fa";
+import Post from "../../PostCrime/Post";
 
 const AskShare = () => {
+
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+
+
   return (
-    <div className="max-w-2xl mx-auto bg-gray-900 text-white rounded-lg shadow-md p-4 my-4">
+    <div className=" mt-[100px] max-w-2xl mx-auto bg-gray-900 text-white rounded-lg shadow-md p-4 my-4">
       <div className="flex items-center gap-3 p-3 bg-gray-800 rounded-lg">
         <img
           src="https://via.placeholder.com/40"
           alt="Avatar"
           className="w-10 h-10 rounded-full"
         />
-        <input
+        <input 
+          onClick={()=>showModal()}
           type="text"
-          placeholder="What do you want to ask or share?"
+          placeholder="What do you want to share?"
           className="flex-1 bg-transparent border-none text-gray-300 focus:outline-none"
         />
       </div>
@@ -24,10 +41,18 @@ const AskShare = () => {
         <button className="flex items-center gap-1 hover:text-green-500">
           <FaEdit /> <span>Answer</span>
         </button>
-        <button className="flex items-center gap-1 hover:text-yellow-500">
+        <button onClick={()=>showModal()} className="flex items-center gap-1 hover:text-yellow-500">
           <FaPen /> <span>Post</span>
         </button>
       </div>
+
+      <Modal 
+        open={isModalOpen}
+        onCancel={handleCancel}
+        footer={null}
+        >
+        <Post/>
+      </Modal>
     </div>
   );
 };
