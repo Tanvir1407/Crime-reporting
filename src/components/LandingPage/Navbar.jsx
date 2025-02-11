@@ -1,6 +1,6 @@
 const Navbar = () => {
   return (
-    <nav className="bg-white shadow-md p-4">
+    <nav className="fixed top-0 right-0 left-0 bg-white shadow-md p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <a href="/" className="text-xl font-bold text-gray-800">
@@ -9,18 +9,7 @@ const Navbar = () => {
 
         {/* Navigation Links (Centered) */}
         <div className="hidden md:flex space-x-6 mx-auto">
-          <a href="#" className="text-gray-600 hover:text-gray-800">
-            Home
-          </a>
-          <a href="#" className="text-gray-600 hover:text-gray-800">
-            About
-          </a>
-          <a href="#" className="text-gray-600 hover:text-gray-800">
-            Services
-          </a>
-          <a href="#" className="text-gray-600 hover:text-gray-800">
-            Contact
-          </a>
+         
         </div>
 
         {/* Login and Register Buttons */}
