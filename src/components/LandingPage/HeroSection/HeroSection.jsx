@@ -1,33 +1,55 @@
+import { FaArrowDown, FaArrowUp, FaComment } from "react-icons/fa";
+import image from "../../../../public/images/bg.jpg";
+
 const HeroSection = () => {
   return (
-    <div className="md:flex  bg-white items-center justify-between px-10 h-screen">
-      <div className="max-w-lg ">
-        <p className="text-sm text-gray-600 mb-2">
-          Stand Up, Speak Out, Report Crime
-        </p>
-        <h1 className="text-5xl font-bold text-gray-900 mb-6">CrimeWatch</h1>
-        <p className="text-lg text-gray-700 mb-8">
-          CrimeWatch is a dedicated platform for reporting and exposing criminal
-          activities and syndicate operations. Join us in the fight for justice
-          and transparency by sharing your reports and staying informed.
-        </p>
-        <div className="flex gap-4">
-          <button className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition duration-300">
-            Report Crime
-          </button>
-          <button className="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-900 transition duration-300">
-            Learn More
-          </button>
+    <div className="max-w-2xl mx-auto bg-[#262626] text-white rounded-lg shadow-md p-4 my-4">
+      {/* Post Header */}
+      <div className="flex items-center gap-3">
+        <img
+          src="https://via.placeholder.com/40"
+          alt="Avatar"
+          className="w-10 h-10 rounded-full"
+        />
+        <div>
+          <h4 className="font-semibold">Abdullah Al Mehmud</h4>
+          <p className="text-gray-400 text-sm">Software engineer</p>
         </div>
       </div>
 
-      {/* Right Side - Image */}
-      <div className="md:w-1/2 my-4">
-        <img
-          src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-          alt="Crime Reporting"
-          className="rounded-lg shadow-lg"
-        />
+      <div className="mt-3">
+        <img src={image} alt="Post visual" className="w-full rounded-lg" />
+      </div>
+
+      {/* Post Content */}
+      <div className="mt-3">
+        <h3 className="font-bold text-lg">
+          I Have seen a syndicate going on in my city
+        </h3>
+        <p className="mt-2 text-gray-300">
+          There is a market where we buy fruits, but I have noticed some
+          suspicious activities happening around. It seems like there is a group
+          of people involved in illegal transactions. We need to be cautious and
+          report any unusual behavior to the authorities.
+        </p>
+      </div>
+
+      {/* Post Image */}
+
+      {/* Post Actions */}
+      <div className="flex gap-5 mt-6">
+        <div className="flex gap-4 bg-[#393939] rounded-xl px-6 py-2 ">
+          <button className="flex items-center gap-1 hover:text-blue-500">
+            <FaArrowUp /> <span>Upvote - 247</span>
+          </button>
+          <button className="flex items-center gap-1 hover:text-gray-500">
+            <FaArrowDown />
+          </button>
+        </div>
+
+        <button className="flex items-center gap-1 hover:text-green-500">
+          <FaComment /> <span>23</span>
+        </button>
       </div>
     </div>
   );
