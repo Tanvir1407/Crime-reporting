@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const isLogged =  localStorage.getItem("isLogged")
+  const firstName = localStorage.getItem("firstName")
+  const lastName = localStorage.getItem("lastName")
+  const userName = localStorage.getItem("username")
   return (
     <nav className="fixed top-0 right-0 left-0 bg-white shadow-md p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -13,7 +17,7 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6 mx-auto"></div>
 
         {/* Login and Register Buttons */}
-        <div className="hidden md:flex space-x-4">
+        {isLogged ?<h1>{firstName && lastName ? `${firstName } ${lastName}` : <h1 className="capitalize"> {userName}</h1>} </h1> : <div className="hidden md:flex space-x-4">
           <Link
             to="/login"
             className="text-gray-600 border-[1.9px] border-gray-900  hover:text-gray-800  px-4 py-2 rounded-lg transition duration-300">
@@ -24,7 +28,7 @@ const Navbar = () => {
             className="bg-gray-900 text-white px-4 py-2 rounded-lg transition duration-300">
             Register
           </Link>
-        </div>
+        </div>}
 
         {/* Mobile Menu Button */}
         <button className="md:hidden text-gray-600 focus:outline-none">
