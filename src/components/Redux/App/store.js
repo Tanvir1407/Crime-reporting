@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "../Api/Counter";
+import divisionReducer from "../Api/Division";
 const store = configureStore({
   reducer: {
-    counter: counterReducer, // Register your slice reducer
+    counter: counterReducer, 
+    division: divisionReducer, 
   },
 });
 
