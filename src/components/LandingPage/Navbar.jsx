@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <nav className="fixed top-0 right-0 left-0 bg-white shadow-md p-4">
@@ -8,22 +10,20 @@ const Navbar = () => {
         </a>
 
         {/* Navigation Links (Centered) */}
-        <div className="hidden md:flex space-x-6 mx-auto">
-         
-        </div>
+        <div className="hidden md:flex space-x-6 mx-auto"></div>
 
         {/* Login and Register Buttons */}
         <div className="hidden md:flex space-x-4">
-          <a
-            href="#"
-            className="text-gray-600 hover:text-gray-800 hover:bg-gray-100 px-4 py-2 rounded-lg transition duration-300">
+          <Link
+            to="/login"
+            className="text-gray-600 border-[1.9px] border-gray-900  hover:text-gray-800  px-4 py-2 rounded-lg transition duration-300">
             Login
-          </a>
-          <a
-            href="#"
-            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">
+          </Link>
+          <Link
+            to="/register"
+            className="bg-gray-900 text-white px-4 py-2 rounded-lg transition duration-300">
             Register
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}

@@ -22,15 +22,24 @@ export const addPost = createAsyncThunk("counter/addPost", async (value) => {
   return response.data;
 });
 
-export const updatePost = createAsyncThunk("counter/updatePost", async (updatedPost) => {
-  const response = await axios.put(`${API_URL}/${updatedPost.id}`, updatedPost);
-  return response.data;
-});
+export const updatePost = createAsyncThunk(
+  "counter/updatePost",
+  async (updatedPost) => {
+    const response = await axios.put(
+      `${API_URL}/${updatedPost.id}`,
+      updatedPost
+    );
+    return response.data;
+  }
+);
 
-export const deletePost = createAsyncThunk("counter/deletePost", async (postId) => {
-  await axios.delete(`${API_URL}/${postId}`);
-  return postId;
-});
+export const deletePost = createAsyncThunk(
+  "counter/deletePost",
+  async (postId) => {
+    await axios.delete(`${API_URL}/${postId}`);
+    return postId;
+  }
+);
 
 // Initial state
 const initialState = {
@@ -71,13 +80,15 @@ const counterSlice = createSlice({
         state.posts.push(action.payload);
       })
       .addCase(updatePost.fulfilled, (state, action) => {
-        const index = state.posts.findIndex(post => post.id === action.payload.id);
+        const index = state.posts.findIndex(
+          (post) => post.id === action.payload.id
+        );
         if (index !== -1) {
           state.posts[index] = action.payload;
         }
       })
       .addCase(deletePost.fulfilled, (state, action) => {
-        state.posts = state.posts.filter(post => post.id !== action.payload);
+        state.posts = state.posts.filter((post) => post.id !== action.payload);
       });
   },
 });
