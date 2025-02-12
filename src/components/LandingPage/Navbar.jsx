@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -5,22 +6,41 @@ const Navbar = () => {
   const firstName = localStorage.getItem("firstName")
   const lastName = localStorage.getItem("lastName")
   const userName = localStorage.getItem("username")
+
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav className="fixed top-0 right-0 left-0 bg-white shadow-md p-4">
+    <nav className="fixed top-0 right-0 left-0 bg-white shadow-md p-4 z-50">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <a href="/" className="text-xl font-bold text-gray-800">
+        <Link to="/" className="text-xl font-bold text-gray-800">
           CRIME WATCH
-        </a>
+        </Link>
 
-        {/* Navigation Links (Centered) */}
-        <div className="hidden md:flex space-x-6 mx-auto"></div>
+        {/* Navigation Links (Hidden on mobile) */}
+        <div className="hidden md:flex space-x-6 mx-auto">
+          <Link to="/" className="text-gray-600 hover:text-gray-800 transition">
+            Home
+          </Link>
+          <Link
+            to="/services"
+            className="text-gray-600 hover:text-gray-800 transition">
+            Services
+          </Link>
+          <Link
+            to="/report"
+            className="text-gray-600 hover:text-gray-800 transition">
+            Report
+          </Link>
+        </div>
 
         {/* Login and Register Buttons */}
         {isLogged ?<h1>{firstName && lastName ? `${firstName } ${lastName}` : <h1 className="capitalize"> {userName}</h1>} </h1> : <div className="hidden md:flex space-x-4">
+        {/* Login and Register Buttons (Hidden on small screens) */}
+        <div className="hidden md:flex space-x-4">
           <Link
             to="/login"
-            className="text-gray-600 border-[1.9px] border-gray-900  hover:text-gray-800  px-4 py-2 rounded-lg transition duration-300">
+            className="text-gray-600 border-[1.9px] border-gray-900 hover:text-gray-800 px-4 py-2 rounded-lg transition duration-300">
             Login
           </Link>
           <Link
@@ -31,7 +51,9 @@ const Navbar = () => {
         </div>}
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden text-gray-600 focus:outline-none">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden text-gray-600 focus:outline-none">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -47,6 +69,38 @@ const Navbar = () => {
           </svg>
         </button>
       </div>
+
+      {/* Mobile Navigation Menu (Placed at the bottom) */}
+      {isOpen && (
+        <div className="fixed w-59 mt-2 right-0 bg-white shadow-lg p-4 md:hidden">
+          <div className="flex flex-col space-y-2 text-center">
+            <Link to="/" className="text-gray-600 py-2 hover:text-gray-800">
+              Home
+            </Link>
+            <Link
+              to="/services"
+              className="text-gray-600 py-2 hover:text-gray-800">
+              Services
+            </Link>
+            <Link
+              to="/report"
+              className="text-gray-600 py-2 hover:text-gray-800">
+              Report
+            </Link>
+            <hr className="my-2" />
+            <Link
+              to="/login"
+              className="text-gray-600 py-2 hover:text-gray-800">
+              Login
+            </Link>
+            <Link
+              to="/register"
+              className="bg-gray-900 text-white py-2 px-4 rounded-lg text-center">
+              Register
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

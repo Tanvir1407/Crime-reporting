@@ -9,8 +9,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
  axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
-axios.interceptors.request.use(async (config) => {
 
+axios.interceptors.request.use(async (config) => {
   const token = localStorage.getItem("access-token");
 
   if (token) {
@@ -43,6 +43,7 @@ const refreshAccessToken = async () => {
       return undefined;
     }
   } catch (error) {
+    console.log(error);
     localStorage.clear();
     // If token refresh fails or for other errors, reject the promise
     window.location.replace("/login");
@@ -54,10 +55,7 @@ axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     const prevRequest = error?.config;
-    if (
-      error?.response?.status === 401 &&
-      !prevRequest?.sent 
-    ) {
+    if (error?.response?.status === 401 && !prevRequest?.sent) {
       prevRequest.sent = true;
 
       const refreshedToken = await refreshAccessToken();
@@ -67,7 +65,7 @@ axios.interceptors.response.use(
         error.config.headers.Authorization = `Bearer ${refreshedToken}`;
         return axios(error.config);
       }
-    } else if (error?.response?.status === 401 ) {
+    } else if (error?.response?.status === 401) {
       localStorage.removeItem("id");
       localStorage.removeItem("access-token");
       localStorage.removeItem("role");
@@ -79,8 +77,6 @@ axios.interceptors.response.use(
     }
   }
 );
-
-
 
 root.render(
   <Provider store={store}>

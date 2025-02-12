@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
 export const userRegister = createAsyncThunk("auth/register", async (value) => {
   try {
     const response = await axios.post("/user/register/", value, {
@@ -44,6 +45,27 @@ export const getLoggedUser = createAsyncThunk("auth/getLoggedUser", async (arg) 
   }
 });
 
+// Thunks for API Calls
+export const getAllDivision = createAsyncThunk(
+  "divisions/divisions",
+  async () => {
+    const response = await fetch("https://bdapis.com/api/v1.2/divisions")
+      .then((res) => res.json())
+      .then((data) => data);
+    return response.data;
+  }
+);
+export const getAllDistrict = createAsyncThunk(
+  "divisions/district",
+  async (arg) => {
+    const response = await fetch(`https://bdapis.com/api/v1.2/division/${arg}`)
+      .then((res) => res.json())
+      .then((data) => data);
+    return response.data;
+  }
+);
+
+
 // Initial state
 const initialState = {
   user: null,
@@ -60,6 +82,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getLoggedUser.pending, (state) => {
+
         state.loading = true;
       })
       .addCase(getLoggedUser.fulfilled, (state, action) => {
@@ -71,6 +94,18 @@ const authSlice = createSlice({
         state.error = action.error.message;
       });
 
+    builder
+      .addCase(getAllDistrict.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAllDistrict.fulfilled, (state, action) => {
+        state.loading = false;
+        state.district = action.payload;
+      })
+      .addCase(getAllDistrict.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
   },
 });
 

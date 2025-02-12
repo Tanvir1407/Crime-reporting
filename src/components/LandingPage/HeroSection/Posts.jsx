@@ -3,10 +3,14 @@ import PropTypes from "prop-types";
 import image from "../../../../public/images/bg.jpg";
 import { Button, Dropdown, Input, Menu } from "antd";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import profile from "../../../../public/images/bg.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { loadAllCrimePost } from "../../Redux/Api/CrimePost";
 
 const Posts = ({ post }) => {
+  const dispatch = useDispatch();
+  const { list } = useSelector((state) => state.crimePost);
   const menu = (
     <Menu>
       <Menu.Item key="1">
@@ -19,6 +23,12 @@ const Posts = ({ post }) => {
   );
 
   const [isComment, setIsComment] = useState(false);
+
+  useEffect(() => {
+    dispatch(loadAllCrimePost());
+  }, [dispatch]);
+
+  console.log(list);
   return (
     <div className="max-w-2xl mx-auto bg-gray-900 text-white rounded-lg shadow-md my-3">
       <div className="px-4 pb-2 my-4">
@@ -117,7 +127,10 @@ const Posts = ({ post }) => {
             <div className="w-full bg-gray-800 pt-1 pb-2 px-2">
               <div className="flex items-center mt-5 ">
                 <img src={profile} alt="" className="h-10 rounded-full" />
-                <Input className="mx-4 rounded-full" />
+                <Input
+                  placeholder="Write down your comment"
+                  className="mx-4 rounded-full"
+                />
                 <Button className="w-30">Send</Button>
               </div>
             </div>
