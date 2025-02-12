@@ -2,6 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const isLogged =  localStorage.getItem("isLogged")
+  const firstName = localStorage.getItem("firstName")
+  const lastName = localStorage.getItem("lastName")
+  const userName = localStorage.getItem("username")
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -29,6 +34,8 @@ const Navbar = () => {
           </Link>
         </div>
 
+        {/* Login and Register Buttons */}
+        {isLogged ?<h1>{firstName && lastName ? `${firstName } ${lastName}` : <h1 className="capitalize"> {userName}</h1>} </h1> : <div className="hidden md:flex space-x-4">
         {/* Login and Register Buttons (Hidden on small screens) */}
         <div className="hidden md:flex space-x-4">
           <Link
@@ -41,7 +48,7 @@ const Navbar = () => {
             className="bg-gray-900 text-white px-4 py-2 rounded-lg transition duration-300">
             Register
           </Link>
-        </div>
+        </div>}
 
         {/* Mobile Menu Button */}
         <button
