@@ -1,17 +1,30 @@
 import { Form, Input, Button, Select, Upload, DatePicker } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-export default function Post() {
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getAllDistrict, getAllDivision } from "../Redux/Api/Division";
 
+
+
+export default function Post() {
+  const dispatch = useDispatch();
+  const { division , loading ,district } = useSelector((state) => state.division);
     const [form] = Form.useForm();
     const { Option } = Select;
-  
-    const divisions = ["Dhaka", "Chattogram", "Rajshahi", "Khulna", "Barishal", "Sylhet", "Rangpur", "Mymensingh"];
-    const districts = { "Dhaka": ["Dhaka", "Gazipur", "Narsingdi"], "Chattogram": ["Chattogram", "Cox's Bazar"] }; // Extend dynamically
   
     const handleSubmit = (values) => {
       console.log(values);
     };
 
+    const handleSelectDivision = (value) => {
+          dispatch(getAllDistrict(value));
+    }
+
+
+    useEffect(() => { 
+      // Fetch data from API
+      dispatch(getAllDivision());
+    }, []);
 
   return (
     
@@ -20,20 +33,24 @@ export default function Post() {
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
        
       <div className="flex gap-4">
-        <Form.Item name="division" label="Division" rules={[{ required: true, message: 'Please select a division' }]}> 
-          <Select placeholder="Select Division">
-            {divisions.map((div) => (
-              <Option key={div} value={div}>{div}</Option>
+        <Form.Item className="min-w-[130px]" loading={loading}  name="division" label="Division" rules={[{ required: true, message: 'Please select a division' }]}> 
+          <Select placeholder="Select Division" onChange={handleSelectDivision}>
+            {division && division.map((div,index) => (
+              <Option key={index} value={div.division}>{div.division}</Option>
             ))}
           </Select>
         </Form.Item>
 
-        <Form.Item name="district" label="District" rules={[{ required: false, message: 'Please select a district' }]}> 
+        <Form.Item className="min-w-[130px]" name="district" label="District" rules={[{ required: false, message: 'Please select a district' }]}> 
           <Select placeholder="Select District">
-            {form.getFieldValue("division") && (districts[form.getFieldValue("division")] || []).map((dist) => (
-              <Option key={dist} value={dist}>{dist}</Option>
-            ))}
+            {
+              district && district.map((dist,index) => (
+                <Option key={index} value={dist.district}>{dist.district}</Option>
+              ))
+            }          
           </Select>
+
+
         </Form.Item>
         <Form.Item name="crimeTime" label="Crime Time" rules={[{ required: true, message: 'Please select crime time' }]}> 
           <DatePicker showTime className="w-full" />

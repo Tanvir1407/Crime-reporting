@@ -40,13 +40,13 @@ const refreshAccessToken = async () => {
     } else {
       localStorage.clear();
       // If token refresh fails or for other errors, reject the promise
-      window.location.replace("/admin/auth/login");
+      window.location.replace("/login");
       return undefined;
     }
-  } catch (err) {
+  } catch (error) {
     localStorage.clear();
     // If token refresh fails or for other errors, reject the promise
-    window.location.replace("/admin/auth/login");
+    window.location.replace("/login");
     return undefined;
   }
 };
