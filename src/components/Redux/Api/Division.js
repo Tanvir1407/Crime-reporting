@@ -1,19 +1,24 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Thunks for API Calls
-export const getAllDivision = createAsyncThunk("divisions/divisions", async () => {
-  const response = await fetch("https://bdapis.com/api/v1.2/divisions")
-  .then((res) => res.json())
-    .then((data) => data);
-  return response.data;
-});
-export const getAllDistrict = createAsyncThunk("divisions/district", async (arg) => {
-  const response = await fetch(`https://bdapis.com/api/v1.2/division/${arg}`)
-  .then((res) => res.json())
-    .then((data) => data);
-  return response.data;
-});
-
+export const getAllDivision = createAsyncThunk(
+  "divisions/divisions",
+  async () => {
+    const response = await fetch("https://bdapis.com/api/v1.2/divisions")
+      .then((res) => res.json())
+      .then((data) => data);
+    return response.data;
+  }
+);
+export const getAllDistrict = createAsyncThunk(
+  "divisions/district",
+  async (arg) => {
+    const response = await fetch(`https://bdapis.com/api/v1.2/division/${arg}`)
+      .then((res) => res.json())
+      .then((data) => data);
+    return response.data;
+  }
+);
 
 // Initial state
 const initialState = {
@@ -31,7 +36,7 @@ const divisionSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllDivision.pending, (state) => {
-        state.loading = true
+        state.loading = true;
       })
       .addCase(getAllDivision.fulfilled, (state, action) => {
         state.loading = false;
@@ -40,12 +45,11 @@ const divisionSlice = createSlice({
       .addCase(getAllDivision.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      })
-
+      });
 
     builder
       .addCase(getAllDistrict.pending, (state) => {
-        state.loading = true
+        state.loading = true;
       })
       .addCase(getAllDistrict.fulfilled, (state, action) => {
         state.loading = false;
@@ -54,8 +58,7 @@ const divisionSlice = createSlice({
       .addCase(getAllDistrict.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      })
-      
+      });
   },
 });
 
