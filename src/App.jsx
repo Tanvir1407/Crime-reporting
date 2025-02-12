@@ -5,7 +5,7 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import AdminProfile from "./components/AdminProfile/AdminProfile";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-
+import DetailsPosts from "./components/LandingPage/HeroSection/DetailsPosts";
 
 const App = () => {
   return (
@@ -16,6 +16,8 @@ const App = () => {
         <Route path="/adminProfile" element={<AdminProfile />} />
         <Route path="/login" element={<Login></Login>} />
         <Route path="/register" element={<Register></Register>} />
+        <Route path="/register" element={<Register></Register>} />
+        <Route path="/singlePage" element={<DetailsPosts />} />
       </Routes>
     </Router>
   );

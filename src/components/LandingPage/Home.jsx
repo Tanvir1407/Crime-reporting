@@ -3,7 +3,6 @@ import Posts from "./HeroSection/Posts";
 import Navbar from "./Navbar";
 
 export default function Home() {
-
   const postData = {
     authorAvatar: "https://via.placeholder.com/40",
     authorName: "Abdullah Al Mehmud",
@@ -22,13 +21,12 @@ export default function Home() {
     upvotes: 247,
     comments: 23,
   };
-  
-  
+
   return (
     <>
       <Navbar />
       <AskShare />
-      <Posts post={postData}/>
+      <Posts post={postData} />
     </>
   );
 }

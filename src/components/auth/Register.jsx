@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaUser, FaLock, FaVoicemail } from "react-icons/fa";
+import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 export default function Register() {
@@ -13,7 +13,7 @@ export default function Register() {
   };
 
   return (
-    <div className="max-w-md mx-auto rounded-lg shadow-md p-6 my-10">
+    <div className="max-w-md mx-auto rounded-lg shadow-md p-6 my-10 bg-gray-900 text-white">
       <h2 className="text-2xl font-bold text-center">Register</h2>
       <form onSubmit={handleSubmit} className="mt-4">
         <div className="mb-4">
@@ -60,11 +60,10 @@ export default function Register() {
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-4"
-        >
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-4">
           Register
         </button>
       </form>
     </div>
   );
-};
+}
